@@ -1,0 +1,22 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap");
+/*Font family: Montserrat;*/
+
+@import url("https://fonts.googleapis.com/css2?family=Alegreya&display=swap");
+/*Font family: Alegreya;*/
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+
+/*Color Pallete 
+    #231e1d(BG-1)
+    #02454F(BG-2)
+    #b8b4b0(TEXT)
+    #111117(Dark BG)
+*/
