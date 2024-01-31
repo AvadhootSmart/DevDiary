@@ -21,3 +21,10 @@ FOR BACKEND**
 
 2.Run
     'npm run dev' 
+
+
+--------------
+
+Still if the project doesnt setup after the given steps, then just clone the following repository
+
+https://github.com/AvadhootSmart/Av_Blog-App_FS.git
