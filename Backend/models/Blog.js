@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-mongoose.connect("mongodb+srv://avadhootsmart14:Magnetic@blogscluster.oijg7ad.mongodb.net/?retryWrites=true&w=majority");
+mongoose.connect(process.env.MONGO_URI);
 
 const BlogSchema = mongoose.Schema({
   Title: {

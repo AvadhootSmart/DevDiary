@@ -1,5 +1,7 @@
 const express = require("express");
 const cors = require("cors");
+require("dotenv").config();
+
 const app = express();
 const PORT = 5000;
 
@@ -65,7 +67,7 @@ app.post("/Admin/AddBlog", async (req, res) => {
 app.post("/Edit/:id", async (req, res) => {
   const { id } = req.params;
   const { title, description, preview } = req.body;
-  res.json(req.body)
+  res.json(req.body);
   try {
     await BlogModel.findByIdAndUpdate(
       id,
