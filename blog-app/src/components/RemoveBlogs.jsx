@@ -7,12 +7,12 @@ function RemoveBlogs() {
   const [Data, setData] = useState([{}]);
 
   async function DeleteBlog(id){
-    await axios.delete(`http://localhost:5000/Admin/RemoveBlog/${id}`);
+    await axios.delete(`https://av-blog-app-fs.vercel.app/RemoveBlog/${id}`);
   };
 
   useEffect(() => {
     async function fetchBlogs() {
-      const response = await axios.get("http://localhost:5000/Blogs");
+      const response = await axios.get("https://av-blog-app-fs.vercel.app//Blogs");
       setData(response.data);
     }
     fetchBlogs();

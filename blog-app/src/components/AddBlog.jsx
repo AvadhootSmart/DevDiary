@@ -14,7 +14,7 @@ function AddBlog() {
     setpreview("")
 
     try {
-      const response = await axios.post("http://localhost:5000/Admin/AddBlog", {
+      const response = await axios.post("http://https://av-blog-app-fs.vercel.app/Admin/AddBlog", {
         title,
         description,
         preview,

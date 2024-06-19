@@ -7,7 +7,14 @@ const PORT = 5000;
 
 const BlogModel = require("./models/Blog");
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://av-blog-app.vercel.app",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
+  })
+);
 app.use(express.json());
 
 app.get("/", (req, res) => {

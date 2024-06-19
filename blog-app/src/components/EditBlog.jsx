@@ -8,7 +8,7 @@ function EditBlog() {
 
   useEffect(() => {
     async function fetchBlogs() {
-      const response = await axios.get("http://localhost:5000/Blogs");
+      const response = await axios.get("https://av-blog-app-fs.vercel.app/Blogs");
       setData(response.data);
     }
     fetchBlogs();
