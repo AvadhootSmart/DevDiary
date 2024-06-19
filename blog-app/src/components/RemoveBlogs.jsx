@@ -7,7 +7,7 @@ function RemoveBlogs() {
   const [Data, setData] = useState([{}]);
 
   async function DeleteBlog(id){
-    await axios.delete(`https://av-blog-app-be.vercel.app/RemoveBlog/${id}`);
+    await axios.delete(`https://av-blog-app-be.vercel.app/Admin/RemoveBlog/${id}`);
   };
 
   useEffect(() => {

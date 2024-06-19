@@ -22,7 +22,7 @@ function EditForm() {
     e.preventDefault();
 
     try {
-      const response = await axios.post(`http://localhost:5000/Edit/${id}`, {
+      const response = await axios.post(`http://av-blog-app-be.vercel.app/Edit/${id}`, {
         title,
         description,
         preview,
