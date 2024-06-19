@@ -10,7 +10,7 @@ function Home() {
 
   useEffect(() => {
     async function fetchBlogs() {
-      const response = await axios.get("http://av-blog-app-be-vercel.app/Blogs");
+      const response = await axios.get("https://av-blog-app-be-vercel.app/Blogs");
       setData(response.data);
     }
     fetchBlogs();
