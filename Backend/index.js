@@ -22,12 +22,18 @@ app.get("/", (req, res) => {
 });
 
 app.get("/Blogs", async (req, res) => {
-  const Blogs = await BlogModel.find();
-  if (!Blogs) {
-    res.status(304).send("Couldnt fetch any data");
+  try {
+    const Blogs = await BlogModel.find();
+    if (!Blogs || Blogs.length === 0) {
+      return res.status(304).send("Couldn't fetch any data");
+    }
+    res.status(200).json(Blogs);
+  } catch (error) {
+    console.error('Error fetching blogs:', error);
+    res.status(500).send("Internal Server Error");
   }
-  res.json(Blogs).status(200);
 });
+
 
 app.get("/Blog/:id", async (req, res) => {
   const id = req.params.id;
