@@ -8,25 +8,25 @@ function Title() {
       duration: 0.9,
       opacity: 0,
       y: 100,
-    });
-    gsap.fromTo(
-      ".Left",
-      {
-        duration: 0.8,
-        x: -200,
-      },
-      { x: 0 }
-    );
-    gsap.fromTo(
-      "Right",
-      {
-        x: 200,
-      },
-      {
-        x: 0,
-        duration: 0.8,
-      }
-    );
+    }),
+      gsap.fromTo(
+        ".Left",
+        {
+          duration: 0.8,
+          x: -200,
+        },
+        { x: 0 }
+      ),
+      gsap.fromTo(
+        ".Right",
+        {
+          x: 200,
+        },
+        {
+          x: 0,
+          duration: 0.8,
+        }
+      );
   });
   return (
     <>
