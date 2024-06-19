@@ -7,10 +7,12 @@ function EditForm() {
   const [title, settitle] = useState({});
   const [description, setdescription] = useState({});
   const [preview, setpreview] = useState({});
-  
+
   useEffect(() => {
     async function fetchBlog() {
-      const response = await axios.get(`https://av-blog-app-be.vercel.app/Blog/${id}`);
+      const response = await axios.get(
+        `https://av-blog-app-be.vercel.app/Blog/${id}`
+      );
       settitle(response.data.Title);
       setdescription(response.data.Description);
       setpreview(response.data.Preview);
@@ -20,13 +22,19 @@ function EditForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    settitle("");
+    setdescription("");
+    setpreview("");
 
     try {
-      const response = await axios.post(`http://av-blog-app-be.vercel.app/Edit/${id}`, {
-        title,
-        description,
-        preview,
-      });
+      const response = await axios.post(
+        `https://av-blog-app-be.vercel.app/Edit/${id}`,
+        {
+          title,
+          description,
+          preview,
+        }
+      );
 
       console.log(title);
       console.log("Blog Edited Successfully!!");
