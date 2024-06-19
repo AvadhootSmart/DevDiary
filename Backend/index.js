@@ -21,7 +21,7 @@ app.get("/", (req, res) => {
   res.send("Backend Working succesfully!!");
 });
 
-app.get("/Blogs", async (req, res) => {
+app.get("/blogs", async (req, res) => {
   try {
     const Blogs = await BlogModel.find();
     if (!Blogs || Blogs.length === 0) {
