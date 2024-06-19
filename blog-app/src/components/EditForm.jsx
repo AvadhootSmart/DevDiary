@@ -10,7 +10,7 @@ function EditForm() {
   
   useEffect(() => {
     async function fetchBlog() {
-      const response = await axios.get(`https://av-blog-app-fs.vercel.app//Blog/${id}`);
+      const response = await axios.get(`https://av-blog-app-fs.vercel.app/Blog/${id}`);
       settitle(response.data.Title);
       setdescription(response.data.Description);
       setpreview(response.data.Preview);

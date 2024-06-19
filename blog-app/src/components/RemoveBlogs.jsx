@@ -12,7 +12,7 @@ function RemoveBlogs() {
 
   useEffect(() => {
     async function fetchBlogs() {
-      const response = await axios.get("https://av-blog-app-fs.vercel.app//Blogs");
+      const response = await axios.get("https://av-blog-app-fs.vercel.app/Blogs");
       setData(response.data);
     }
     fetchBlogs();
