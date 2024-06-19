@@ -10,7 +10,7 @@ function BlogPage() {
   const { id } = useParams();
   useEffect(() => {
     async function fetchBlog() {
-      const response = await axios.get(`http://av-blog-app-fs.vercel.app/Blog/${id}`);
+      const response = await axios.get(`http://av-blog-app-be.vercel.app/Blog/${id}`);
       setblog(response.data);
     }
     fetchBlog();
