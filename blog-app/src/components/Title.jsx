@@ -1,12 +1,33 @@
 import React from "react";
 import Line from "./Line";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 function Title() {
+  useGSAP(() => {
+    gsap.from(".Heading", {
+      duration: 0.9,
+      opacity: 0,
+      y: 100,
+    });
+    gsap.from(".Left", {
+      duration: 0.8,
+      x: -200,
+    });
+    gsap.from("Right", {
+      duration: 0.8,
+      x: 500,
+    });
+  });
   return (
     <>
       <div className="flex justify-around text-[#b8b4b0] w-full mt-[20vh] items-center">
-        <Line />
-        <h2 className="text-4xl font-[Alegreya] uppercase">Av Blogs</h2>
-        <Line />
+        <div className="Left">
+          <Line />
+        </div>
+        <h2 className="Heading text-4xl font-[Alegreya] uppercase">Av Blogs</h2>
+        <div className="Right">
+          <Line />
+        </div>
       </div>
     </>
   );
