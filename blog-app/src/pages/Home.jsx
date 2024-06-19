@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Title from "../components/Title";
 import BlogList from "../components/BlogList";
 import About from "../components/About";
-import Recent from "../components/Recent";
 import axios from "axios";
 import gsap from "gsap";
 
