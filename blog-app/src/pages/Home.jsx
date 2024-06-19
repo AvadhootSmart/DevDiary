@@ -4,13 +4,23 @@ import BlogList from "../components/BlogList";
 import About from "../components/About";
 import Recent from "../components/Recent";
 import axios from "axios";
+import gsap from "gsap";
 
 function Home() {
   const [Data, setData] = useState([{}]);
 
   useEffect(() => {
+    gsap.from(".Content", {
+      opacity:0,
+      y:100,
+      duration:0.5,
+      delay:0.5,
+      ease:'power1',
+    });
     async function fetchBlogs() {
-      const response = await axios.get("https://av-blog-app-be.vercel.app/blogs");
+      const response = await axios.get(
+        "https://av-blog-app-be.vercel.app/blogs"
+      );
       setData(response.data);
     }
     fetchBlogs();
@@ -18,11 +28,11 @@ function Home() {
 
   return (
     <>
-      <div className={`min-h-screen bg-[#231e1d] text-[#b8b4b0]  w-full flex flex-col font-[Alegreya]`}>
+      <div className="min-h-screen bg-[#231e1d] text-[#b8b4b0]  w-full flex flex-col font-[Alegreya]">
         <Title />
         <div className="Content w-full flex justify-around p-20">
           <BlogList BlogsData={Data} />
-          <div className="flex flex-col py-10 px-16 -mr-16 w-[35%]">
+          <div className="Content flex flex-col py-10 px-16 -mr-16 w-[35%]">
             <About />
           </div>
         </div>
