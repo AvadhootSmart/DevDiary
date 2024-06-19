@@ -10,7 +10,9 @@ const Footer = () => {
       <div className="flex z-10 flex-col">
         <div className="copyright flex justify-between items-center px-10 h-[10vh] bg-[#111117] text-white">
           <p>Copyright&copy; 2023, All rights reserved </p>
-          <FaGithub className="text-3xl" />
+          <Link to="https://github.com/AvadhootSmart/Av_Blog-App_FS">
+            <FaGithub className="text-3xl hover:scale-110 transition" />
+          </Link>
           <Link to="/Admin/ViewAll">Manage Blogs[Admins Only]</Link>
         </div>
       </div>
