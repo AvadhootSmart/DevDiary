@@ -4,6 +4,7 @@ import BlogList from "../components/BlogList";
 import About from "../components/About";
 import axios from "axios";
 import gsap from "gsap";
+import { Audio } from "react-loader-spinner";
 
 function Home() {
   const [Data, setData] = useState([{}]);

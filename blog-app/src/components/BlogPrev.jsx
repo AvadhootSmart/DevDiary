@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { InfinitySpin } from "react-loader-spinner";
 import { Link } from "react-router-dom";
 
 function BlogPrev({ Blogs }) {
@@ -20,15 +21,24 @@ function BlogPrev({ Blogs }) {
 
   return (
     <>
-      <div className="">
-        <p className="text-[#737170] text-l">{FDate}</p>
-        <p className="text-2xl my-2">{Title}</p>
-        <p className="my-6">{Preview}</p>
+      {Blogs ? (
+        <div className="">
+          <p className="text-[#737170] text-l">{FDate}</p>
+          <p className="text-2xl my-2">{Title}</p>
+          <p className="my-6">{Preview}</p>
 
-        <Link to={`/Blog/${_id}`} className="text-[#737170] italic">
-          Read more
-        </Link>
-      </div>
+          <Link to={`/Blog/${_id}`} className="text-[#737170] italic">
+            Read more
+          </Link>
+        </div>
+      ) : (
+        <InfinitySpin
+          visible={true}
+          width="200"
+          color="white"
+          ariaLabel="infinity-spin-loading"
+        />
+      )}
     </>
   );
 }
