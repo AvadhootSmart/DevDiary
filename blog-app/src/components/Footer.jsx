@@ -13,7 +13,7 @@ const Footer = () => {
           <Link to="https://github.com/AvadhootSmart/Av_Blog-App_FS">
             <FaGithub className="text-3xl hover:scale-110 transition" />
           </Link>
-          <Link to="/Admin/ViewAll">Manage Blogs[Admins Only]</Link>
+          <Link to="/Admin/ViewAll">Manage Blogs</Link>
         </div>
       </div>
     </>
