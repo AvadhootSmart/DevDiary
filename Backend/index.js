@@ -1,20 +1,51 @@
 const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
+const LocalStrategy = require("passport-local").Strategy;
+const passport = require("passport");
 
 const app = express();
 const PORT = 5000;
 
 const BlogModel = require("./models/Blog");
-const UserModel = require("./models/Users")
+const UserModel = require("./models/Users");
 
+passport.use(
+  new LocalStrategy(function (Username, Password, done) {
+    UserModel.findOne({ Username: Username }, function (err, user) {
+      if (err) {
+        return done(err);
+      }
+      if (!user) {
+        return done(null, false);
+      }
+      if (!user.verifyPassword(Password)) {
+        return done(null, false);
+      }
+      return done(null, user);
+    });
+  }),
+);
+
+//Authentication:
+
+app.post(
+  "/login",
+  passport.authenticate("local", { failureRedirect: "/login" }),
+  function (req, res) {
+    res.redirect("/");
+  },
+);
+
+
+//Cors:
 app.use(
   cors({
     origin: "https://av-blog-app.vercel.app",
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
-  })
+  }),
 );
 app.use(express.json());
 
@@ -22,6 +53,7 @@ app.get("/", (req, res) => {
   res.send("Backend Working succesfully!!");
 });
 
+//APIs:
 app.get("/blogs", async (req, res) => {
   try {
     const Blogs = await BlogModel.find();
@@ -30,11 +62,10 @@ app.get("/blogs", async (req, res) => {
     }
     res.status(200).json(Blogs);
   } catch (error) {
-    console.error('Error fetching blogs:', error);
+    console.error("Error fetching blogs:", error);
     res.status(500).send("Internal Server Error");
   }
 });
-
 
 app.get("/Blog/:id", async (req, res) => {
   const id = req.params.id;
@@ -86,7 +117,7 @@ app.post("/Edit/:id", async (req, res) => {
     await BlogModel.findByIdAndUpdate(
       id,
       { Title: title, Description: description, Preview: preview },
-      { new: true }
+      { new: true },
     );
     // res.send(200).json({ message: "Updated Successfully" });
   } catch (error) {
