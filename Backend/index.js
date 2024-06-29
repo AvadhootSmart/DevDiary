@@ -41,7 +41,7 @@ app.post(
 //Cors:
 app.use(
   cors({
-    origin: "https://av-blog-app.vercel.app",
+    origin: process.env.URI,
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,

@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
 
+
+const backendURL = "http://localhost:5000" 
+
 function AddBlog() {
   const [title, settitle] = useState("");
   const [description, setdescription] = useState("");
@@ -14,7 +17,7 @@ function AddBlog() {
     setpreview("")
 
     try {
-      const response = await axios.post("https://av-blog-app-be.vercel.app/Admin/AddBlog", {
+      const response = await axios.post(`${backendURL}/Admin/AddBlog`, {
         title,
         description,
         preview,

@@ -3,12 +3,15 @@ import axios from "axios";
 import { MdEdit } from "react-icons/md";
 import { Link } from "react-router-dom";
 
+
+const backendURL = "http://localhost:5000" 
+
 function EditBlog() {
   const [Data, setData] = useState([{}]);
 
   useEffect(() => {
     async function fetchBlogs() {
-      const response = await axios.get("https://av-blog-app-be.vercel.app/Blogs");
+      const response = await axios.get(`${backendURL}/Blogs`);
       setData(response.data);
     }
     fetchBlogs();

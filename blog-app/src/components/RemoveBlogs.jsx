@@ -3,16 +3,19 @@ import React, { useEffect, useState } from "react";
 import { MdDeleteForever } from "react-icons/md";
 import { Link } from "react-router-dom";
 
+
+const backendURL = "http://localhost:5000" 
+
 function RemoveBlogs() {
   const [Data, setData] = useState([{}]);
 
   async function DeleteBlog(id){
-    await axios.delete(`https://av-blog-app-be.vercel.app/Admin/RemoveBlog/${id}`);
+    await axios.delete(`${backendURL}/Admin/RemoveBlog/${id}`);
   };
 
   useEffect(() => {
     async function fetchBlogs() {
-      const response = await axios.get("https://av-blog-app-be.vercel.app/Blogs");
+      const response = await axios.get(`${backendURL}/Blogs`);
       setData(response.data);
     }
     fetchBlogs();

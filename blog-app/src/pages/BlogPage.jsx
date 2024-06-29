@@ -5,12 +5,15 @@ import Title from "../components/Title";
 import BlogContent from "../components/BlogContent";
 import About from "../components/About";
 
+
+const backendURL = "http://localhost:5000" 
+
 function BlogPage() {
   const [blog, setblog] = useState([{}]);
   const { id } = useParams();
   useEffect(() => {
     async function fetchBlog() {
-      const response = await axios.get(`https://av-blog-app-be.vercel.app/Blog/${id}`);
+      const response = await axios.get(`${backendURL}/Blog/${id}`);
       setblog(response.data);
     }
     fetchBlog();
