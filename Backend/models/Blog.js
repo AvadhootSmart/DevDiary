@@ -14,7 +14,11 @@ const BlogSchema = mongoose.Schema({
     type: String,
   },
   Date: {
-    type:Date,
+    type: Date,
+  },
+  User: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
   },
 });
 

@@ -6,6 +6,7 @@ const app = express();
 const PORT = 5000;
 
 const BlogModel = require("./models/Blog");
+const UserModel = require("./models/Users")
 
 app.use(
   cors({
