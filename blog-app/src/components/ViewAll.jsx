@@ -1,15 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
+import AuthContext from "../context/AuthContext";
 
 const backendURL = "http://localhost:5000";
 
 function ViewAll() {
+    const { user } = useContext(AuthContext);
     const [Data, setData] = useState([{}]);
 
     useEffect(() => {
         async function fetchBlogs() {
-            const response = await axios.get(`${backendURL}/blogs`);
-            setData(response.data);
+            const response = await axios.get(
+                `${backendURL}/${user._id}/blogs`,
+            );
+            setData(response.data.Blogs);
         }
         fetchBlogs();
     }, []);

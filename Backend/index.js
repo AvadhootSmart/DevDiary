@@ -3,6 +3,7 @@ const cors = require("cors");
 require("dotenv").config();
 const LocalStrategy = require("passport-local").Strategy;
 const passport = require("passport");
+const session = require("express-session");
 
 const app = express();
 const PORT = 5000;
@@ -11,52 +12,92 @@ const BlogModel = require("./models/Blog");
 const UserModel = require("./models/Users");
 
 passport.use(
-  new LocalStrategy(function (Username, Password, done) {
-    UserModel.findOne({ Username: Username }, function (err, user) {
-      if (err) {
-        return done(err);
-      }
+  new LocalStrategy(async function (username, password, done) {
+    try {
+      const user = await UserModel.findOne({ Username: username });
+
       if (!user) {
-        return done(null, false);
+        return done(null, false, { message: "Incorrect username." });
       }
-      if (!user.verifyPassword(Password)) {
-        return done(null, false);
+
+      if (user.Password != password) {
+        return done(null, false, { message: "Incorrect password." });
       }
+
       return done(null, user);
-    });
+    } catch (err) {
+      return done(err);
+    }
   }),
 );
 
-//Authentication:
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
 
-app.post(
-  "/login",
-  passport.authenticate("local", { failureRedirect: "/login" }),
-  function (req, res) {
-    res.redirect("/");
-  },
-);
-
+passport.deserializeUser(async (id, done) => {
+  try {
+    const user = await UserModel.findById(id);
+    done(null, user);
+  } catch (err) {
+    done(err);
+  }
+});
 
 //Cors:
 app.use(
   cors({
-    origin: process.env.URI,
+    origin: `http://localhost:5173`,
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
   }),
 );
+
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(
+  session({ secret: "jai Shree Ram", resave: false, saveUninitialized: false }),
+);
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.get("/", (req, res) => {
   res.send("Backend Working succesfully!!");
 });
 
+//Authentication:
+
+app.post(
+  "/login",
+  passport.authenticate("local", {
+    failureRedirect: `http://localhost:5173/Auth`,
+  }),
+  function (req, res) {
+    const { _id, Username } = req.user;
+    res.status(200).json({ Username, _id });
+  },
+);
+
+app.post("/register", async (req, res) => {
+  const existingUser = await UserModel.findOne({ Username: req.body.username }); // Create a new user
+
+  if (existingUser) {
+    return res.status(400).json({ message: "Username already taken" });
+  }
+  const newUser = new UserModel({
+    Username: req.body.username,
+    Password: req.body.password, // Remember to hash the password before saving!
+  });
+
+  await newUser.save();
+  res.status(200).json({ Username: req.body.username });
+});
+
 //APIs:
 app.get("/blogs", async (req, res) => {
   try {
-    const Blogs = await BlogModel.find();
+    const Blogs = await BlogModel.find().populate('User');
     if (!Blogs || Blogs.length === 0) {
       return res.status(304).send("Couldn't fetch any data");
     }
@@ -67,6 +108,15 @@ app.get("/blogs", async (req, res) => {
   }
 });
 
+//From Editor/ViewAll
+app.get("/:id/blogs", async (req, res) => {
+  const Id = req.params.id;
+  const User = await UserModel.findById(Id).populate("Blogs");
+
+  res.json({ Blogs: User.Blogs });
+});
+
+//From Home
 app.get("/Blog/:id", async (req, res) => {
   const id = req.params.id;
   const Blog = await BlogModel.findById(id);
@@ -79,6 +129,8 @@ app.get("EditBlog/:id", async (req, res) => {
   res.json(Blog).status(200);
 });
 
+/**
+ 
 app.get("/Admin/ViewAll", async (req, res) => {
   const Blogs = await BlogModel.find();
   if (!Blogs) {
@@ -87,18 +139,27 @@ app.get("/Admin/ViewAll", async (req, res) => {
   res.json(Blogs).status(200);
 });
 
+ */
+
 //POST Requests:
-app.post("/Admin/AddBlog", async (req, res) => {
+app.post("/:id/AddBlog", async (req, res) => {
   try {
+    const UserId = req.params.id;
+
     const newBlog = new BlogModel({
       Title: req.body.title,
       Description: req.body.description,
       Preview: req.body.preview,
       Date: Date.now(),
+      User: UserId,
     });
 
-    await newBlog.save();
+    const savedBlog = await newBlog.save(); // Save the new blog
 
+    // Update user's blogs array
+    await UserModel.findByIdAndUpdate(UserId, {
+      $push: { Blogs: savedBlog._id },
+    });
     // Send a successful response to the client
     res
       .status(201)
@@ -126,7 +187,7 @@ app.post("/Edit/:id", async (req, res) => {
   }
 });
 
-app.delete("/Admin/RemoveBlog/:id", async (req, res) => {
+app.delete("/Editor/RemoveBlog/:id", async (req, res) => {
   const { id } = req.params;
   try {
     const DeleteBlog = await BlogModel.findByIdAndDelete(id);
