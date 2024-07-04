@@ -56,8 +56,17 @@ passport.deserializeUser(async (id, done) => {
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
 app.use(
-    session({ secret: "jai Shree Ram", resave: false, saveUninitialized: false }),
+    session({
+        cookie: { maxAge: 86400000 },
+        store: new MemoryStore({
+            checkPeriod: 86400000, // prune expired entries every 24h
+        }),
+        resave: false,
+        secret: "jai Shree Ram",
+        saveUninitialized:false,
+    }),
 );
 app.use(passport.initialize());
 app.use(passport.session());
