@@ -47,7 +47,7 @@ passport.deserializeUser(async (id, done) => {
 //Cors:
 app.use(
   cors({
-    origin: `http://localhost:5173`,
+    origin: `http://av-blog-app.vercel.app`,
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
@@ -193,7 +193,7 @@ app.delete("/Editor/RemoveBlog/:id", async (req, res) => {
     const DeleteBlog = await BlogModel.findByIdAndDelete(id);
 
     if (!DeleteBlog) {
-      return res.send(404).json({ message: "Blog not found" });
+      return res.sendStatus(404).json({ message: "Blog not found" });
     }
   } catch (error) {
     console.error("Error deleting the blog", error);
