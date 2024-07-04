@@ -9,7 +9,7 @@ import AuthContext from "../context/AuthContext";
 import { Link } from "react-router-dom";
 import { InfinitySpin } from "react-loader-spinner";
 
-const backendURL = "http://av-blog-app-be.vercel.app";
+const backendURL = "https://av-blog-app-be.vercel.app";
 
 function Home() {
   const [Data, setData] = useState([{}]);
