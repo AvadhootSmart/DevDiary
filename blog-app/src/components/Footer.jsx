@@ -1,7 +1,5 @@
 import React from "react";
 import { FaGithub, FaInstagram, FaTwitter } from "react-icons/fa";
-import Recent from "./Recent";
-import Line from "./Line";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
@@ -13,7 +11,6 @@ const Footer = () => {
           <Link to="https://github.com/AvadhootSmart/Av_Blog-App_FS">
             <FaGithub className="text-3xl hover:scale-110 transition" />
           </Link>
-          <Link to="/Admin/ViewAll">Manage Blogs</Link>
         </div>
       </div>
     </>

@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import axios from "axios";
 import AuthContext from "../context/AuthContext";
 
-const backendURL = "http://localhost:5000";
+const backendURL = "http://av-blog-app-be.vercel.app";
 
 function AddBlog() {
     const { user } = useContext(AuthContext);

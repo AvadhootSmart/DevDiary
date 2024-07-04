@@ -3,13 +3,15 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 
+const backendURL = 'http://av-blog-app-be-vercel.app'
+
 const AuthPage = () => {
   const [isLogin, setIsLogin] = useState(true);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="bg-white p-8 rounded-lg shadow-lg w-96">
-        <h2 className="text-2xl font-bold mb-6 text-center">
+    <div className="min-h-screen flex items-center justify-center bg-[#231e1d]">
+      <div className="bg-transparent p-8 rounded-lg shadow-lg w-96 border-2 border-[#b8b4b0]">
+        <h2 className="text-2xl font-bold mb-6 text-center text-[#b8b4b0]">
           {isLogin ? "Login" : "Register"}
         </h2>
         {isLogin ? <LoginForm /> : <RegisterForm />}
@@ -36,7 +38,7 @@ const LoginForm = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`http://localhost:5000/login`, {
+      const response = await axios.post(`${backendURL}/login`, {
         username,
         password,
       });
@@ -52,20 +54,20 @@ const LoginForm = () => {
   return (
     <form className="space-y-4" onSubmit={handleLogin}>
       <div>
-        <label className="block text-gray-700">Username</label>
+        <label className="block text-[#b8b4b0]">Username</label>
         <input
           type="text"
-          className="w-full p-2 border border-gray-300 rounded mt-1"
+          className="w-full bg-transparent p-2 text-[#b8b4b0] border border-gray-300 rounded mt-1"
           required
           value={username}
           onChange={(e) => setusername(e.target.value)}
         />
       </div>
       <div>
-        <label className="block text-gray-700">Password</label>
+        <label className="block text-[#b8b4b0]">Password</label>
         <input
           type="password"
-          className="w-full p-2 border border-gray-300 rounded mt-1"
+          className="w-full p-2 border border-gray-300 bg-transparent text-[#b8b4b0] rounded mt-1"
           required
           value={password}
           onChange={(e) => setpassword(e.target.value)}
@@ -87,7 +89,7 @@ const RegisterForm = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`http://localhost:5000/register`, {
+      const response = await axios.post(`${backendURL}/register`, {
         username,
         password,
       });
@@ -99,20 +101,20 @@ const RegisterForm = () => {
   return (
     <form className="space-y-4" onSubmit={handleRegister}>
       <div>
-        <label className="block text-gray-700">Username</label>
+        <label className="block text-[#b8b4b0]">Username</label>
         <input
           type="text"
-          className="w-full p-2 border border-gray-300 rounded mt-1"
+          className="w-full p-2 border border-gray-300 bg-transparent text-[#b8b4b0] rounded mt-1"
           required
           value={username}
           onChange={(e) => setusername(e.target.value)}
         />
       </div>
       <div>
-        <label className="block text-gray-700">Password</label>
+        <label className="block text-[#b8b4b0]">Password</label>
         <input
           type="password"
-          className="w-full p-2 border border-gray-300 rounded mt-1"
+          className="w-full p-2 border border-gray-300 rounded mt-1 bg-transparent text-[#b8b4b0]"
           required
           value={password}
           onChange={(e) => setpassword(e.target.value)}

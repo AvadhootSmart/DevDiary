@@ -1,11 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import "react-toastify/dist/ReactToastify.css";
 import "./index.css";
 import {
-    Route,
-    RouterProvider,
-    createBrowserRouter,
-    createRoutesFromElements,
+  Route,
+  RouterProvider,
+  createBrowserRouter,
+  createRoutesFromElements,
 } from "react-router-dom";
 
 import { AuthProvider } from "./context/AuthContext";
@@ -22,31 +23,33 @@ import EditForm from "./components/EditForm";
 import EditBlogBase from "./EditBlogBase";
 import AuthPage from "./pages/AuthPage";
 import Profile from "./pages/Profile";
+import { ToastContainer } from "react-toastify";
 
 const router = createBrowserRouter(
-    createRoutesFromElements(
-        <Route path="/" element={<Layout />}>
-            <Route path="" element={<Home />} />
-            <Route path="/Auth" element={<AuthPage />} />
-            <Route path="/Profile" element={<Profile />} />
-            <Route path="Blog/:id" element={<BlogPage />} />
-            <Route path="Editor" element={<AdminLayout />}>
-                <Route path="ViewAll" element={<ViewAll />} />
-                <Route path="AddBlog" element={<AddBlog />} />
-                <Route path="RemoveBlog" element={<RemoveBlogs />} />
-                <Route path="EditBlog" element={<EditBlogBase />}>
-                    <Route path="" element={<EditBlog />} />
-                    <Route path="Edit/:id" element={<EditForm />} />
-                </Route>
-            </Route>
-        </Route>,
-    ),
+  createRoutesFromElements(
+    <Route path="/" element={<Layout />}>
+      <Route path="" element={<Home />} />
+      <Route path="/Auth" element={<AuthPage />} />
+      <Route path="/Profile" element={<Profile />} />
+      <Route path="Blog/:id" element={<BlogPage />} />
+      <Route path="Editor" element={<AdminLayout />}>
+        <Route path="ViewAll" element={<ViewAll />} />
+        <Route path="AddBlog" element={<AddBlog />} />
+        <Route path="RemoveBlog" element={<RemoveBlogs />} />
+        <Route path="EditBlog" element={<EditBlogBase />}>
+          <Route path="" element={<EditBlog />} />
+          <Route path="Edit/:id" element={<EditForm />} />
+        </Route>
+      </Route>
+    </Route>,
+  ),
 );
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-    <React.StrictMode>
-        <AuthProvider>
-            <RouterProvider router={router} />
-        </AuthProvider>
-    </React.StrictMode>,
+  <React.StrictMode>
+    <AuthProvider>
+      <RouterProvider router={router} />
+      <ToastContainer />
+    </AuthProvider>
+  </React.StrictMode>,
 );
