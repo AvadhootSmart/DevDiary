@@ -4,6 +4,7 @@ require("dotenv").config();
 const LocalStrategy = require("passport-local").Strategy;
 const passport = require("passport");
 const session = require("express-session");
+const MemoryStore = require('memorystore')(session)
 
 const app = express();
 const PORT = 5000;
