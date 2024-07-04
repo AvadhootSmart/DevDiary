@@ -88,6 +88,8 @@ const RegisterForm = () => {
   const [password, setpassword] = useState("");
   const handleRegister = async (e) => {
     e.preventDefault();
+        setusername("");
+        setpassword("");
     try {
       const response = await axios.post(`${backendURL}/register`, {
         username,
