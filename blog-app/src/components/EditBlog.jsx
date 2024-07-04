@@ -4,7 +4,7 @@ import { MdEdit } from "react-icons/md";
 import { Link } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 
-const backendURL = "http://av-blog-app-be.vercel.app";
+const backendURL = "https://av-blog-app-be.vercel.app";
 
 function EditBlog() {
     const { user } = useContext(AuthContext);

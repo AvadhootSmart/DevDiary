@@ -3,7 +3,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 
 
-const backendURL = "http://av-blog-app-be.vercel.app" 
+const backendURL = "https://av-blog-app-be.vercel.app" 
 
 function EditForm() {
   const { id } = useParams();

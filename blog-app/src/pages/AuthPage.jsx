@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 
-const backendURL = 'http://av-blog-app-be-vercel.app'
+const backendURL = 'https://av-blog-app-be-vercel.app'
 
 const AuthPage = () => {
   const [isLogin, setIsLogin] = useState(true);
