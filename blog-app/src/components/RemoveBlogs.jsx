@@ -5,7 +5,7 @@ import AuthContext from "../context/AuthContext";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const backendURL = "http://av-blog-app-be.vercel.app";
+const backendURL = "https://av-blog-app-be.vercel.app";
 
 function RemoveBlogs() {
   const { user } = useContext(AuthContext);

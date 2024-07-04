@@ -5,7 +5,7 @@ import Title from "../components/Title";
 import BlogContent from "../components/BlogContent";
 import About from "../components/About";
 
-const backendURL = "http://av-blog-app-be.vercel.app";
+const backendURL = "https://av-blog-app-be.vercel.app";
 
 function BlogPage() {
   const [blog, setblog] = useState({});

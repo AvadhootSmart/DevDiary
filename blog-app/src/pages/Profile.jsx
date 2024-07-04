@@ -8,7 +8,7 @@ import Auth from "../components/Auth";
 import AuthContext from "../context/AuthContext";
 import { Link } from "react-router-dom";
 
-const backendURL ="http://av-blog-app-be.vercel.app"
+const backendURL ="https://av-blog-app-be.vercel.app"
 
 export default function Profile() {
     const { user } = useContext(AuthContext);
