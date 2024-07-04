@@ -47,7 +47,7 @@ passport.deserializeUser(async (id, done) => {
 //Cors:
 app.use(
   cors({
-    origin: `http://av-blog-app.vercel.app`,
+    origin: `https://av-blog-app.vercel.app`,
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
