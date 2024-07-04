@@ -1,20 +1,34 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { MdDeleteForever } from "react-icons/md";
-import { Link } from "react-router-dom";
+import AuthContext from "../context/AuthContext";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+const backendURL = "http://av-blog-app-be.vercel.app";
 
 function RemoveBlogs() {
+  const { user } = useContext(AuthContext);
   const [Data, setData] = useState([{}]);
 
-  async function DeleteBlog(id){
-    await axios.delete(`https://av-blog-app-be.vercel.app/Admin/RemoveBlog/${id}`);
-  };
+  async function DeleteBlog(id) {
+    try {
+      await axios.delete(`${backendURL}/Editor/RemoveBlog/${id}`);
+      setData(Data.filter((blog) => blog._id !== id));
+      toast.success(
+        "Blog Deleted succesfully, changes can be viewed in the view all tab or the home page",
+      );
+    } catch (err) {
+      console.log("Error deleting the blog", err);
+    }
+  }
+
+  async function fetchBlogs() {
+    const response = await axios.get(`${backendURL}/${user._id}/blogs`);
+    setData(response.data.Blogs);
+  }
 
   useEffect(() => {
-    async function fetchBlogs() {
-      const response = await axios.get("https://av-blog-app-be.vercel.app/Blogs");
-      setData(response.data);
-    }
     fetchBlogs();
   }, []);
 
@@ -33,7 +47,7 @@ function RemoveBlogs() {
                 <span className="text-[#b8b4b0] normal-case">{blog.Title}</span>
               </h2>
               <MdDeleteForever
-                onClick={()=>DeleteBlog(blog._id)}
+                onClick={() => DeleteBlog(blog._id)}
                 className="text-red-700 text-3xl hover:scale-125 transition-all ease-in-out cursor-pointer"
               />
             </div>

@@ -5,14 +5,17 @@ import Title from "../components/Title";
 import BlogContent from "../components/BlogContent";
 import About from "../components/About";
 
+const backendURL = "http://av-blog-app-be.vercel.app";
+
 function BlogPage() {
-  const [blog, setblog] = useState([{}]);
+  const [blog, setblog] = useState({});
   const { id } = useParams();
+
+  async function fetchBlog() {
+    const response = await axios.get(`${backendURL}/Blog/${id}`);
+    setblog(response.data);
+  }
   useEffect(() => {
-    async function fetchBlog() {
-      const response = await axios.get(`https://av-blog-app-be.vercel.app/Blog/${id}`);
-      setblog(response.data);
-    }
     fetchBlog();
   }, []);
 

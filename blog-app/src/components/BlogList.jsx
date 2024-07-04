@@ -2,11 +2,12 @@ import React from "react";
 import BlogPrev from "./BlogPrev";
 
 function BlogList({ BlogsData }) {
-
-  if(!BlogsData){
-    return(
-      <h1>No blogs available</h1>
-    )
+  if (BlogsData.length == 0) {
+    return (
+      <div className="flex justify-center items-center">
+        <h1 className="text-center text-2xl">You have no blogs available</h1>
+      </div>
+    );
   }
   return (
     <>

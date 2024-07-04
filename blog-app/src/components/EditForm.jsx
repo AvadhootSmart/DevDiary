@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
+
+const backendURL = "http://av-blog-app-be.vercel.app" 
+
 function EditForm() {
   const { id } = useParams();
   const [title, settitle] = useState({});
@@ -11,7 +14,7 @@ function EditForm() {
   useEffect(() => {
     async function fetchBlog() {
       const response = await axios.get(
-        `https://av-blog-app-be.vercel.app/Blog/${id}`
+        `${backendURL}/Blog/${id}`
       );
       settitle(response.data.Title);
       setdescription(response.data.Description);
@@ -28,7 +31,7 @@ function EditForm() {
 
     try {
       const response = await axios.post(
-        `https://av-blog-app-be.vercel.app/Edit/${id}`,
+        `${backendURL}/Edit/${id}`,
         {
           title,
           description,
