@@ -99,9 +99,11 @@ const RegisterForm = () => {
                 password,
             });
 
-            if (response.status === 200 || 201) {
+            if (response.status === 200) {
                 login(response.data);
                 navigateTo("/");
+            } else if (response.status === 201) {
+                console.log("Username already exists, please login instead")
             }
         } catch (error) {
             console.error("Registration failed", error);

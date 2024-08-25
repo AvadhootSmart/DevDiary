@@ -93,7 +93,9 @@ app.post("/register", async (req, res) => {
   const existingUser = await UserModel.findOne({ Username: req.body.username }); // Create a new user
 
   if (existingUser) {
-    return res.status(201).json({ message: "Username already taken" });
+    return res
+      .status(201)
+      .json({ message: "Username already taken", Username: existingUser });
   }
   const newUser = new UserModel({
     Username: req.body.username,
