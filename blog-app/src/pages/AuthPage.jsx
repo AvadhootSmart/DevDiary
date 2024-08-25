@@ -85,6 +85,8 @@ const LoginForm = () => {
 
 const RegisterForm = () => {
     const navigateTo = useNavigate();
+    const { login } = useContext(AuthContext);
+
     const [username, setusername] = useState("");
     const [password, setpassword] = useState("");
     const handleRegister = async (e) => {
