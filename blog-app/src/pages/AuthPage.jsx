@@ -99,7 +99,7 @@ const RegisterForm = () => {
                 password,
             });
 
-            if (response.status === 200) {
+            if (response.status === 200 || 201) {
                 login(response.data);
                 navigateTo("/");
             }
