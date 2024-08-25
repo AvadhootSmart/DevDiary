@@ -97,7 +97,8 @@ const RegisterForm = () => {
                 password,
             });
 
-            if (response.status == 200) {
+            if (response.status === 200) {
+                login(response.data);
                 navigateTo("/");
             }
         } catch (error) {

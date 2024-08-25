@@ -31,7 +31,7 @@ passport.use(
         return done(null, false, { message: "Incorrect username." });
       }
 
-      if (user.Password != password) {
+      if (user.Password !== password) {
         return done(null, false, { message: "Incorrect password." });
       }
 
@@ -72,7 +72,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get("/", (req, res) => {
+app.get("/", (res) => {
   res.send("Backend Working succesfully!!");
 });
 
@@ -93,11 +93,11 @@ app.post("/register", async (req, res) => {
   const existingUser = await UserModel.findOne({ Username: req.body.username }); // Create a new user
 
   if (existingUser) {
-    return res.status(400).json({ message: "Username already taken" });
+    return res.status(201).json({ message: "Username already taken" });
   }
   const newUser = new UserModel({
     Username: req.body.username,
-    Password: req.body.password, 
+    Password: req.body.password,
   });
 
   await newUser.save();
