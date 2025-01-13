@@ -12,18 +12,15 @@ const PORT = 5000;
 const BlogModel = require("./models/Blog");
 const UserModel = require("./models/Users");
 
-const DEV_URL = `http://localhost:5173`;
-const PROD_URL = `https://av-blog-app.vercel.app`;
 
 //Cors:
 app.use(
-    cors(),
-    // cors({
-    //     origin: `http://localhost:5173`,
-    //     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    //     allowedHeaders: ["Content-Type", "Authorization"],
-    //     credentials: true,
-    // }),
+    cors({
+        origin: process.env.PROD_URL,
+        methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+        allowedHeaders: ["Content-Type", "Authorization"],
+        credentials: true,
+    }),
 );
 
 passport.use(
@@ -85,7 +82,7 @@ app.get("/", (res) => {
 app.post(
     "/login",
     passport.authenticate("local", {
-        // failureRedirect: `${DEV_URL}/Auth`,
+        failureRedirect: `${process.env.PROD_URL}/Auth`,
     }),
     function (req, res) {
         const { _id, Username } = req.user;
