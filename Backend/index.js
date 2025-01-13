@@ -73,7 +73,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.get("/", (res) => {
-  res.status(200).json("Backend Working succesfully!!");
+  res.send("Backend Working succesfully!!");
 });
 
 //Authentication:
