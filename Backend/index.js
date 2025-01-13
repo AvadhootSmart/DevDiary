@@ -13,14 +13,15 @@ const BlogModel = require("./models/Blog");
 const UserModel = require("./models/Users");
 
 //Cors:
-app.use(
-  cors({
-    origin: process.env.PROD_URL,
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    allowedHeaders: ["Content-Type", "Authorization"],
-    credentials: true,
-  }),
-);
+app.use(cors());
+// app.use(
+//   cors({
+//     origin: process.env.PROD_URL,
+//     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+//     allowedHeaders: ["Content-Type", "Authorization"],
+//     credentials: true,
+//   }),
+// );
 
 passport.use(
   new LocalStrategy(async function (username, password, done) {
@@ -72,7 +73,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get("/", (req,res) => {
+app.get("/", (req, res) => {
   res.send("Backend Working succesfully!!");
 });
 
