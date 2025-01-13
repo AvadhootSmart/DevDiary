@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import  { useContext, useEffect, useState } from "react";
 import Title from "../components/Title";
 import BlogList from "../components/BlogList";
 import axios from "axios";
@@ -19,7 +19,9 @@ function Home() {
         async function fetchBlogs() {
             setLoading(true);
             try {
-                const response = await axios.get(`${backendURL}/blogs`);
+                const response = await axios.get(`${backendURL}/blogs`, {
+                    withCredentials: true,
+                });
                 setData(response.data);
             } catch (err) {
                 console.log("Error fetching blogs", err);
