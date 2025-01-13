@@ -1,4 +1,3 @@
-import React from "react";
 import Line from "./Line";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -12,9 +11,11 @@ function Title({ title }) {
     });
     return (
         <>
-            <div className="flex justify-around text-[#b8b4b0] w-full mt-[20vh] items-center">
+            <div className="flex justify-around text-[#b8b4b0] w-full lg:mt-[20vh] sm:mt-[10vh] items-center">
                 <Line />
-                <h2 className="Heading text-4xl font-[Alegreya] uppercase">{title}</h2>
+                <h2 className="Heading lg:text-4xl sm:text-3xl font-[Alegreya] uppercase">
+                    {title}
+                </h2>
                 <Line />
             </div>
         </>

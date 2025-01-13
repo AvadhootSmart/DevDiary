@@ -3,14 +3,14 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 
-const backendURL = "https://av-blog-app-be.vercel.app";
+const backendURL = import.meta.env.VITE_BACKEND_URL;
 
 const AuthPage = () => {
     const [isLogin, setIsLogin] = useState(true);
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-[#231e1d]">
-            <div className="bg-transparent p-8 rounded-lg shadow-lg w-96 border-2 border-[#b8b4b0]">
+            <div className="bg-transparent lg:p-8 sm:p-4 rounded-lg shadow-lg lg:w-96 sm:w-80 border-2 border-[#b8b4b0]">
                 <h2 className="text-2xl font-bold mb-6 text-center text-[#b8b4b0]">
                     {isLogin ? "Login" : "Register"}
                 </h2>
@@ -20,7 +20,9 @@ const AuthPage = () => {
                         onClick={() => setIsLogin(!isLogin)}
                         className="text-blue-500 hover:underline"
                     >
-                        {isLogin ? "Switch to Register" : "Switch to Login"}
+                        {isLogin
+                            ? "New Here? Create an Account"
+                            : "Have an Account?, Login instead"}
                     </button>
                 </div>
             </div>
@@ -103,7 +105,7 @@ const RegisterForm = () => {
                 login(response.data);
                 navigateTo("/");
             } else if (response.status === 201) {
-                console.log("Username already exists, please login instead")
+                console.log("Username already exists, please login instead");
             }
         } catch (error) {
             console.error("Registration failed", error);

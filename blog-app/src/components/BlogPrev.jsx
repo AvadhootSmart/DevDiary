@@ -20,10 +20,10 @@ function BlogPrev({ Blogs }) {
 
   return (
     <>
-      <div className="">
+      <div>
         <p className="text-[#737170] text-l">{FDate}</p>
-        <p className="text-2xl my-2">{Title}</p>
-        <p className="my-6">{Preview}</p>
+        <p className="text-2xl my-2 line-clamp-2 w-full">{Title}</p>
+        <p className="my-6 line-clamp-5">{Preview}</p>
 
         <Link to={`/Blog/${_id}`} className="text-[#737170] italic">
           Read more

@@ -10,7 +10,7 @@ import { MdDeleteForever } from "react-icons/md";
 function Panel() {
     return (
         <>
-            <div className="w-[20vw] z-0 h-screen fixed bg-[#111117] text-white">
+            <div className="lg:w-[20vw] z-0 h-screen fixed bg-[#111117] text-white">
                 <div className="p-10 text-xl uppercase font-[Montserrat] font-light">
                     Admin Panel
                     <div className="mt-14 text-lg">

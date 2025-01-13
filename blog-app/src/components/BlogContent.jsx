@@ -20,7 +20,7 @@ function BlogContent({ content }) {
 
   return (
     <>
-      <div className="w-[45%]">
+      <div className="lg:w-[45%]">
         <p className="text-[#737170] text-l">{FDate}</p>
         <p className="text-2xl my-2">{Title}</p>
         <p className="my-6">{Description}</p>
