@@ -16,11 +16,10 @@ const UserModel = require("./models/Users");
 // app.use(cors());
 app.use(
   cors({
-    // origin: process.env.PROD_URL ,
-    origin: "*",
+    origin: "https://av-dev-diary.vercel.app",
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    // allowedHeaders: ["Content-Type", "Authorization"],
-    // credentials: true,
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
   }),
 );
 
