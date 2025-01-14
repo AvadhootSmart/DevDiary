@@ -16,7 +16,6 @@ import BlogPage from "./pages/BlogPage";
 import AdminLayout from "./AdminLayout";
 import ViewAll from "./components/ViewAll";
 import AddBlog from "./components/AddBlog";
-import Admin from "./AdminLayout";
 import RemoveBlogs from "./components/RemoveBlogs";
 import EditBlog from "./components/EditBlog";
 import EditForm from "./components/EditForm";
@@ -24,12 +23,11 @@ import EditBlogBase from "./EditBlogBase";
 import AuthPage from "./pages/AuthPage";
 import Profile from "./pages/Profile";
 import { ToastContainer } from "react-toastify";
-import Temp from "./pages/temp";
+import { Analytics } from "@vercel/analytics/react";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
-      <Route path="temp" element={<Temp />} />
       <Route path="" element={<Home />} />
       <Route path="/Auth" element={<AuthPage />} />
       <Route path="/Profile" element={<Profile />} />
@@ -53,5 +51,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <RouterProvider router={router} />
       <ToastContainer />
     </AuthProvider>
+    <Analytics />
   </React.StrictMode>,
 );
