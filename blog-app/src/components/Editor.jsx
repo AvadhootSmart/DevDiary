@@ -1,47 +1,67 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import EditorJS from "@editorjs/editorjs";
 import { EDITOR_JS_TOOLS } from "../utils/editorTools";
 
 const EditorComponent = ({ onContentChange, initialData }) => {
-    const ejInstance = useRef();
+  const ejInstance = useRef(null);
+  const [isLoading, setIsLoading] = useState(true);
 
-    const initEditor = () => {
-        const editor = new EditorJS({
-            holder: "editorjs",
-            onReady: () => {
-                ejInstance.current = editor;
-            },
-            autofocus: true,
-            data: initialData,
-            onChange: async () => {
-                let content = await editor.saver.save();
+  const initEditor = () => {
+    // Destroy any existing editor instance before reinitializing
+    if (ejInstance.current) {
+      ejInstance.current.destroy();
+    }
 
-                if (onContentChange) {
-                    onContentChange(content);
-                }
-            },
-            tools: EDITOR_JS_TOOLS,
-        });
-    };
-
-    // This will run only once
-    useEffect(() => {
-        if (ejInstance.current === null) {
-            initEditor();
-            console.log("Editor initialized");
+    const editor = new EditorJS({
+      holder: "editorjs",
+      onReady: () => {
+        ejInstance.current = editor;
+        setIsLoading(false); // Editor is ready
+        console.log("Editor initialized successfully");
+      },
+      autofocus: true,
+      data: initialData || { blocks: [] }, // Fallback to an empty block if initialData is not provided
+      onChange: async () => {
+        try {
+          const content = await editor.saver.save();
+          if (onContentChange) {
+            onContentChange(content);
+          }
+        } catch (error) {
+          console.error("Error saving editor content:", error);
         }
+      },
+      tools: EDITOR_JS_TOOLS,
+    });
 
-        return () => {
-            ejInstance?.current?.destroy();
-            ejInstance.current = null;
-        };
-    }, []);
+    // Catch any initialization errors
+    editor.isReady.catch((error) => {
+      console.error("Editor initialization failed:", error);
+      setIsLoading(false); // Hide the loader even if initialization fails
+    });
+  };
 
-    return (
-        <>
-            <div id="editorjs" className="text-black"></div>
-        </>
-    );
+  useEffect(() => {
+    initEditor();
+
+    return () => {
+      if (ejInstance.current) {
+        ejInstance.current.destroy();
+        ejInstance.current = null;
+      }
+    };
+  }, [initialData]); // Reinitialize when initialData changes
+
+  return (
+    <>
+      {isLoading && (
+        <div className="flex justify-center items-center min-h-[300px]">
+          <p className="text-gray-500">Loading editor...</p>
+        </div>
+      )}
+      <div id="editorjs" className={`text-black ${isLoading ? "hidden" : ""}`}></div>
+    </>
+  );
 };
 
 export default EditorComponent;
