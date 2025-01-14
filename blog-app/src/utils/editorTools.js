@@ -1,12 +1,12 @@
 import Header from "@editorjs/header";
-import List from "@editorjs/list";
 import Paragraph from "@editorjs/paragraph";
 import Table from "@editorjs/table";
-import Quote from "@editorjs/quote";
 import Delimiter from "@editorjs/delimiter";
-import Warning from "@editorjs/warning";
 import Code from "@editorjs/code";
 import InlineCode from "@editorjs/inline-code";
+// import List from "@editorjs/list";
+// import Quote from "@editorjs/quote";
+// import Warning from "@editorjs/warning";
 // import ImageTool from "@editorjs/image";
 // import Embed from "@editorjs/embed";
 // import LinkTool from "@editorjs/link";

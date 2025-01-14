@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from "react";
 import EditorJS from "@editorjs/editorjs";
-import Header from "@editorjs/header";
 import { EDITOR_JS_TOOLS } from "../utils/editorTools";
 
 const EditorComponent = ({ onContentChange, initialData }) => {
@@ -29,6 +28,7 @@ const EditorComponent = ({ onContentChange, initialData }) => {
     useEffect(() => {
         if (ejInstance.current === null) {
             initEditor();
+            console.log("Editor initialized");
         }
 
         return () => {
