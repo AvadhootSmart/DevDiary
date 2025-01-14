@@ -14,10 +14,11 @@ function BlogPage() {
     async function fetchBlog() {
         const response = await axios.get(`${backendURL}/Blog/${id}`);
         setblog(response.data);
+        console.log(typeof response.data.Date)
     }
     useEffect(() => {
         fetchBlog();
-    }, [fetchBlog]);
+    }, []);
 
     return (
         <div className="min-h-screen bg-[#231e1d] text-[#b8b4b0]  w-full flex flex-col font-[Alegreya]">
