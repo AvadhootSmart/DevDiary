@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const Footer = () => {
     return (
         <>
-            <div className="flex z-10 flex-col">
+            <div className="flex z-10 flex-col sm:hidden">
                 <div className="copyright flex justify-between items-center lg:px-10 sm:px-5 h-[10vh] bg-[#111117] text-white">
                     <p className="sm:text-sm">
                         DevDiary&copy; 2023, All rights reserved{" "}

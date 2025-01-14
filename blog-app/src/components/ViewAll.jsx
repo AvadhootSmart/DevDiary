@@ -28,7 +28,7 @@ function ViewAll() {
 
     return (
         <>
-            <div className="lg:ml-[20vw] lg:w-full sm:w-[100vw] min-h-screen lg:p-24 sm:p-5 text-[#b8b4b0]">
+            <div className="lg:w-full sm:w-[100vw] min-h-screen lg:p-24 sm:p-5 sm:mb-20 text-[#b8b4b0]">
                 <h1 className="font-[Montserrat] text-2xl text-white uppercase">
                     All Blogs
                 </h1>
@@ -50,17 +50,17 @@ function ViewAll() {
                         {Data.map((blog) => (
                             <div className="text-lg" key={blog._id}>
                                 <h2 className="mt-10">
-                                    <span className="font-bold uppercase text-white">Title-</span>{" "}
+                                    <span className="font-bold uppercase text-white">Title -</span>{" "}
                                     {blog.Title}
                                 </h2>
                                 <p className="mt-4">
                                     <span className="font-bold uppercase text-white">
-                                        Content-
+                                        Preview -
                                     </span>
                                     {blog.Preview}
                                 </p>
                                 <p className="mt-3">
-                                    <span className="font-bold uppercase text-white">Date-</span>
+                                    <span className="font-bold uppercase text-white">Date - </span>
                                     {blog.Date}
                                 </p>
                                 <hr className="mt-2 border-dashed" />
