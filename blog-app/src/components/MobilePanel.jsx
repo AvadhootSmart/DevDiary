@@ -7,7 +7,7 @@ import { MdDeleteForever } from "react-icons/md";
 
 const MobilePanel = () => {
     return (
-        <div className="fixed bottom-0 z-50 h-20 w-full sm:bg-[#231e1d] lg:bg-neutral-900 sm:border-t flex gap-10 sm:gap-12 text-white text-2xl justify-center">
+        <div className="fixed bottom-0 h-20 w-full sm:bg-[#231e1d] lg:bg-neutral-900 sm:border-t flex gap-10 sm:gap-12 text-white text-2xl justify-center">
             <Link to="/Editor/ViewAll" className="flex items-center gap-4">
                 <HiViewList />
             </Link>
