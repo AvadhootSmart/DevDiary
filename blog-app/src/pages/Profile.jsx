@@ -26,17 +26,17 @@ export default function Profile() {
         <>
             <div>
                 <div className="min-h-screen bg-[#231e1d] text-[#b8b4b0] w-full flex flex-col font-[Alegreya]">
-                    <Title title={`${user.Username} Blogs`} />
+                    <Title title={`Your Blogs`} />
                 <div className="w-full flex lg:flex-row sm:flex-col lg:justify-around sm:justify-normal lg:p-20 sm:p-5">
                         <BlogList BlogsData={Data} />
                         {user ? (
-                            <div className="flex gap-4 mt-10 w-fit">
-                                <div className="border-2 border-white rounded-md w-fit p-4">
+                            <div className="flex gap-4 mt-10 w-fit h-fit">
+                                <button className="border-2 border-white rounded-md w-fit p-4">
                                     <Link to={"/"}>All Blogs</Link>
-                                </div>
-                                <div className="border-2 border-white rounded-md w-fit p-4">
+                                </button>
+                                <button className="border-2 border-white rounded-md w-fit p-4">
                                     <Link to="/Editor/ViewAll">Manage Blogs</Link>
-                                </div>
+                                </button>
                             </div>
                         ) : (
                             <Auth />

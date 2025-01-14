@@ -1,4 +1,4 @@
-import  { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Title from "../components/Title";
 import BlogList from "../components/BlogList";
 import axios from "axios";
@@ -30,7 +30,7 @@ function Home() {
             }
         }
         fetchBlogs();
-    }, [user]);
+    }, []);
 
     return (
         <>

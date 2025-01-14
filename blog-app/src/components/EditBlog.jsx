@@ -24,7 +24,7 @@ function EditBlog() {
 
     return (
         <>
-            <div className="lg:ml-[20vw] lg:w-full sm:w-[100vw] min-h-screen lg:p-24 sm:p-5 text-[#b8b4b0]">
+        <div className="lg:p-24 sm:p-5 w-[100vw] min-h-screen text-[#b8b4b0]">
                 <h1 className="font-[Montserrat] text-2xl text-white uppercase">
                     Edit Blogs
                 </h1>
@@ -46,8 +46,8 @@ function EditBlog() {
                         {Data.map((blog) => (
                             <div className="text-lg" key={blog._id}>
                                 <div className="mt-10 flex justify-between items-center">
-                                    <h2 className="font-bold uppercase text-white">
-                                        Title-
+                                    <h2 className="font-bold uppercase text-white truncate">
+                                        Title - {' '}
                                         <span className="text-[#b8b4b0] normal-case">
                                             {blog.Title}
                                         </span>
