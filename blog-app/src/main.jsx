@@ -24,10 +24,12 @@ import EditBlogBase from "./EditBlogBase";
 import AuthPage from "./pages/AuthPage";
 import Profile from "./pages/Profile";
 import { ToastContainer } from "react-toastify";
+import Temp from "./pages/temp";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
+      <Route path="temp" element={<Temp />} />
       <Route path="" element={<Home />} />
       <Route path="/Auth" element={<AuthPage />} />
       <Route path="/Profile" element={<Profile />} />

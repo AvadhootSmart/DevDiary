@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import EditorComponent from "./Editor";
 
 const backendURL = import.meta.env.VITE_BACKEND_URL;
 
@@ -66,19 +67,8 @@ function EditForm() {
                         />
                     </div>
                     <div className="relative">
-                        <label
-                            htmlFor="Description"
-                            className="absolute text-lg bg-[#231e1d] top-0 left-0 -mt-3 ml-4 text-white font-[Montserrat] font-extralight"
-                        >
-                            Description
-                        </label>
-                        <textarea
-                            name="Description"
-                            value={description}
-                            onChange={(e) => setdescription(e.target.value)}
-                            className="w-full min-h-[20vh] px-2 py-4  border rounded-md focus:outline-none focus:border-blue-400 bg-transparent font-[Alegreya]"
-                            required
-                        />
+                        <EditorComponent initialData={description}/>
+
                     </div>
                     <div className="relative">
                         <label
