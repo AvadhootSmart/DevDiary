@@ -16,7 +16,7 @@ const UserModel = require("./models/Users");
 // app.use(cors());
 app.use(
   cors({
-    origin: "https://av-dev-diary.vercel.app",
+    origin: process.env.DEV_URL,
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
@@ -121,7 +121,7 @@ app.get("/blogs", async (req, res) => {
   }
 });
 
-//From Editor/ViewAll
+//Editor/ViewAll
 app.get("/:id/blogs", async (req, res) => {
   const Id = req.params.id;
   const User = await UserModel.findById(Id).populate("Blogs");
@@ -129,7 +129,7 @@ app.get("/:id/blogs", async (req, res) => {
   res.json({ Blogs: User.Blogs });
 });
 
-//From Home
+//Home
 app.get("/Blog/:id", async (req, res) => {
   const id = req.params.id;
   const Blog = await BlogModel.findById(id);
@@ -142,18 +142,6 @@ app.get("EditBlog/:id", async (req, res) => {
   res.json(Blog).status(200);
 });
 
-/**
- 
-app.get("/Admin/ViewAll", async (req, res) => {
-  const Blogs = await BlogModel.find();
-  if (!Blogs) {
-    res.status(304).send("Couldnt fetch any data");
-  }
-  res.json(Blogs).status(200);
-});
-
- */
-
 //POST Requests:
 app.post("/:id/AddBlog", async (req, res) => {
   try {
@@ -161,7 +149,7 @@ app.post("/:id/AddBlog", async (req, res) => {
 
     const newBlog = new BlogModel({
       Title: req.body.title,
-      Description: req.body.description,
+      Content: req.body.content,
       Preview: req.body.preview,
       Date: Date.now(),
       User: UserId,
@@ -183,12 +171,12 @@ app.post("/:id/AddBlog", async (req, res) => {
 
 app.post("/Edit/:id", async (req, res) => {
   const { id } = req.params;
-  const { title, description, preview } = req.body;
+  const { title, content, preview } = req.body;
   res.json(req.body);
   try {
     await BlogModel.findByIdAndUpdate(
       id,
-      { Title: title, Description: description, Preview: preview },
+      { Title: title, Content: content, Preview: preview },
       { new: true },
     );
     res.send(200).json({ message: "Updated Successfully" });

@@ -6,8 +6,8 @@ const BlogSchema = mongoose.Schema({
         type: String,
         required: true,
     },
-    Description: {
-        type: String,
+    Content: {
+        type: Object,
         required: true,
     },
     Preview: {
