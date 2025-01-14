@@ -16,7 +16,7 @@ const UserModel = require("./models/Users");
 // app.use(cors());
 app.use(
   cors({
-    origin: process.env.DEV_URL,
+    origin: process.env.PROD_URL,
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
