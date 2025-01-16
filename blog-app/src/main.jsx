@@ -22,8 +22,8 @@ import EditForm from "./components/EditForm";
 import EditBlogBase from "./EditBlogBase";
 import AuthPage from "./pages/AuthPage";
 import Profile from "./pages/Profile";
-import { ToastContainer } from "react-toastify";
 import { Analytics } from "@vercel/analytics/react";
+import { Toaster } from "react-hot-toast";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -47,9 +47,9 @@ const router = createBrowserRouter(
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
+    <Toaster />
     <AuthProvider>
       <RouterProvider router={router} />
-      <ToastContainer />
     </AuthProvider>
     <Analytics />
   </React.StrictMode>,

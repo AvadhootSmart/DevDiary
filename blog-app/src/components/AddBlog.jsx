@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import axios from "axios";
 import AuthContext from "../context/AuthContext";
 import EditorComponent from "./Editor";
+import toast from "react-hot-toast";
 
 const backendURL = import.meta.env.VITE_BACKEND_URL;
 
@@ -40,9 +41,10 @@ function AddBlog() {
                 date,
             });
 
-            // console.log("Blog Submitted Successfully!!");
+            toast.success("Blog Submitted Successfully!!");
             // console.log("Response:", response.data);
         } catch (error) {
+            toast.error("Something went wrong, Please try again later");
             console.error("Error saving the blog", error);
         }
     };
