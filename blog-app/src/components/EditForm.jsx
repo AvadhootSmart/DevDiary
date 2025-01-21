@@ -1,49 +1,54 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import EditorComponent from "./Editor";
 import { InfinitySpin } from "react-loader-spinner";
+import toast from "react-hot-toast";
 
 const backendURL = import.meta.env.VITE_BACKEND_URL;
 
 function EditForm() {
+    const navigate = useNavigate();
     const { id } = useParams();
     const [title, settitle] = useState({});
     const [content, setContent] = useState({});
     const [preview, setpreview] = useState({});
     const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        async function fetchBlog() {
-            try {
-                const response = await axios.get(`${backendURL}/Blog/${id}`);
-                settitle(response.data.Title);
-                setContent(response.data.Content);
-                setpreview(response.data.Preview);
-            } catch (error) {
-                console.error("Error fetching blog data", error);
-            } finally {
-                setLoading(false);
-            }
+    async function fetchBlog() {
+        try {
+            const response = await axios.get(`${backendURL}/Blog/${id}`);
+            settitle(response.data.Title);
+            const { time, blocks } = response.data.Content;
+            setContent({ time, blocks });
+            console.log(content);
+            setpreview(response.data.Preview);
+        } catch (error) {
+            console.error("Error fetching blog data", error);
+        } finally {
+            setLoading(false);
         }
+    }
+
+    useEffect(() => {
         fetchBlog();
     }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        settitle("");
-        setContent({});
-        setpreview("");
+        // settitle("");
+        // setContent({});
+        // setpreview("");
 
         try {
-            const response = await axios.post(`${backendURL}/Edit/${id}`, {
+            await axios.post(`${backendURL}/Edit/${id}`, {
                 title,
                 content,
                 preview,
             });
 
-            console.log("Blog Edited Successfully!!");
-            console.log("Response:", response.data);
+            toast.success("Blog Edited Successfully!!");
+            navigate("/Editor/ViewAll");
         } catch (error) {
             console.error("Error editing the blog", error);
         }

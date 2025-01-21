@@ -28,7 +28,7 @@ function ViewAll() {
 
     return (
         <>
-            <div className="lg:w-full sm:w-[100vw] min-h-screen lg:p-24 sm:p-5 sm:mb-20 text-[#b8b4b0]">
+            <div className="w-[100vw] min-h-screen lg:p-24 sm:p-5 sm:mb-20 text-[#b8b4b0]">
                 <h1 className="font-[Montserrat] text-2xl text-white uppercase">
                     All Blogs
                 </h1>

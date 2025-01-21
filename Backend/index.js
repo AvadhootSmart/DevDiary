@@ -172,17 +172,16 @@ app.post("/:id/AddBlog", async (req, res) => {
 app.post("/Edit/:id", async (req, res) => {
     const { id } = req.params;
     const { title, content, preview } = req.body;
-    res.json(req.body);
     try {
         await BlogModel.findByIdAndUpdate(
             id,
             { Title: title, Content: content, Preview: preview },
             { new: true },
         );
-        res.send(200).json({ message: "Updated Successfully" });
+        res.status(200).json({ message: "Updated Successfully" });
     } catch (error) {
         console.error("Error Updating the Blog", error);
-        res.send(500).json({ message: "Server Error" });
+        res.status(500).json({ message: "Internal Server Error" });
     }
 });
 

@@ -13,14 +13,15 @@ const EditorComponent = ({ onContentChange, initialData }) => {
     }
 
     const editor = new EditorJS({
+      tools: EDITOR_JS_TOOLS,
       holder: "editorjs",
       onReady: () => {
         ejInstance.current = editor;
         setIsLoading(false); // Editor is ready
         console.log("Editor initialized successfully");
       },
-      autofocus: true,
-      data: initialData || { blocks: [] }, // Fallback to an empty block if initialData is not provided
+      // autofocus: true,
+      data: { time: initialData.time, blocks: initialData.blocks } || {},
       onChange: async () => {
         try {
           const content = await editor.saver.save();
@@ -31,13 +32,11 @@ const EditorComponent = ({ onContentChange, initialData }) => {
           console.error("Error saving editor content:", error);
         }
       },
-      tools: EDITOR_JS_TOOLS,
     });
 
-    // Catch any initialization errors
     editor.isReady.catch((error) => {
       console.error("Editor initialization failed:", error);
-      setIsLoading(false); // Hide the loader even if initialization fails
+      setIsLoading(false);
     });
   };
 
@@ -50,7 +49,7 @@ const EditorComponent = ({ onContentChange, initialData }) => {
         ejInstance.current = null;
       }
     };
-  }, [initialData]); // Reinitialize when initialData changes
+  }, []); // Reinitialize when initialData changes
 
   return (
     <>
@@ -59,7 +58,10 @@ const EditorComponent = ({ onContentChange, initialData }) => {
           <p className="text-gray-500">Loading editor...</p>
         </div>
       )}
-      <div id="editorjs" className={`text-black ${isLoading ? "hidden" : ""}`}></div>
+      <div
+        id="editorjs"
+        className={`text-black ${isLoading ? "hidden" : ""}`}
+      ></div>
     </>
   );
 };
